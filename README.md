@@ -9,7 +9,7 @@ Python 2.7
 #### Usage ####
 -------------------------------------------
 
-`python parser.py --infile=/location/of/source/file.csv --outfile=/location/of/where/you/want/results.csv`
+`python parser.py --infile=/location/of/source/file.csv --outfile=cert_results.csv`
 
 example: 
 
