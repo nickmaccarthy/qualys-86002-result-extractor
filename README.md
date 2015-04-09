@@ -1,6 +1,6 @@
 ## Qualys QID 86002 SSL Results Extractor ##
 
-#### Extracts SSL information from the results of QID 86002 from a Qualys Patch Report ####
+#### Extracts SSL information from the results of QID 86002 from a Qualys Report ####
 -------------------------------------------
 #### Requirements ####
 Python 2.7
