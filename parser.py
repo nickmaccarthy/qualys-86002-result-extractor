@@ -5,16 +5,20 @@ import re
 import getopt
 import collections
 
+''' Parses relevant SSL information from a Qualys report for QID 86002 and creates a new CSV file with certificate details '''
+
 csv.field_size_limit(sys.maxsize)
 
 CV_HOME = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 
+'''Return first item in sequence where our item is in the list'''
 def find(f, seq):
-  """Return first item in sequence where f(item) == True."""
   for item in seq:
     if f in item:
         return item
 
+''' Gets the Subject Common Name from the results
+    This is typically the domain name the certificate is issued for '''
 def get_subject_common_name(results):
     regex = re.compile(".*\(0\)SUBJECT NAME.*?commonName\s+(.*?)$",re.MULTILINE|re.DOTALL)
     r = regex.match(results)
@@ -23,6 +27,7 @@ def get_subject_common_name(results):
     else:
         return "Not found"
 
+''' Gets the issuer name for the certificate '''
 def get_issuer_name(results):
     m = re.search('.*\(\d+\)ISSUER NAME.*?\s*organizationName\s+(.*?)$', results, re.M|re.DOTALL)
     if m:
@@ -44,7 +49,6 @@ def clean(text):
     text = str(text)
     escape_these = ',()'
 
-    print text
     for char in escape_these:
         text = text.replace(char, '')
     return text
@@ -142,6 +146,7 @@ def main(argv):
                     issuer_name = get_issuer_name(cert)
                     subject_common_name = get_subject_common_name(cert)
 
+                    ''' If you want more information from the source report, simply add it to this OrderedDict '''
                     d = collections.OrderedDict()
                     d["IP"] = row['IP']
                     d["DNS"] = row['DNS']
@@ -165,7 +170,7 @@ def main(argv):
             dw.writerow(l)
 
 
-    print "All done - check your results at: {0}".format(opts['outfile'])
+    print "All done - you can find your formatted results at: {0}".format(opts['outfile'])
 
 
 if __name__ == "__main__":
