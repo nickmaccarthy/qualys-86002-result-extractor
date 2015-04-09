@@ -99,9 +99,6 @@ def main(argv):
             start_idx = lines.index('"IP","Network","DNS","NetBIOS","Tracking Method","OS","IP Status","QID","Title","Vuln Status","Type","Severity","Port","Protocol","FQDN","SSL","First Detected","Last Detected","Times Detected","CVE ID","Vendor Reference","Bugtraq ID","CVSS","CVSS Base","CVSS Temporal","CVSS Environment","Threat","Impact","Solution","Exploitability","Associated Malware","Results","PCI Vuln","Ticket State","Instance","OS CPE","Category"\r\n')
         except:
             start_idx = lines.index('"IP","DNS","NetBIOS","Tracking Method","OS","IP Status","QID","Title","Vuln Status","Type","Severity","Port","Protocol","FQDN","SSL","First Detected","Last Detected","Times Detected","CVE ID","Vendor Reference","Bugtraq ID","CVSS","CVSS Base","CVSS Temporal","CVSS Environment","Threat","Impact","Solution","Exploitability","Associated Malware","Results","PCI Vuln","Ticket State","Instance","Category"\r\n')
-        finally:
-            print "Im unable to detect where the results section of the file starts.  Ensure you have run the correct report in Qualys"
-            sys.exit()
 
 
         qualys_csv = lines[start_idx:]
